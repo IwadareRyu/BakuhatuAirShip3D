@@ -5,11 +5,26 @@ using UnityEngine;
 public class AirShipController3D : MonoBehaviour
 {
     Rigidbody _rb;
+    [Tooltip("プレイヤーの動きの速さ")]
     [SerializeField]float _speed = 2f;
-    [SerializeField]bool _isGround;
+    [Tooltip("地面に接しているか")]
+    bool _isGround;
+    [Tooltip("ジャンプの高さ")]
     [SerializeField]float _jumpPower = 2f;
+    [Tooltip("カメラ切り替え")]
     [SerializeField] GameObject _cm3;
+    [Tooltip("三人称か否か")]
     bool _istherdPerson;
+    [Tooltip("飛行機のオブジェクト")]
+    [SerializeField] GameObject _ship;
+    [Tooltip("プレイヤーのコア")]
+    [SerializeField] GameObject _core;
+    [Tooltip("飛行機発射のbool型")]
+    bool _isBakuhatu;
+    [Tooltip("球を発射するマズル")]
+    [SerializeField] GameObject _mazzle;
+    [Tooltip("飛行機の球")]
+    [SerializeField] GameObject _bullet;
 
     // Start is called before the first frame update
     void Start()
@@ -54,9 +69,25 @@ public class AirShipController3D : MonoBehaviour
         {
             _cm3.SetActive(false);
             _istherdPerson = false;
-        }    
+        }
+        if(Input.GetButtonDown("Fire1") && !_isBakuhatu)
+        {
+            Instantiate(_bullet, _mazzle.transform.position, Quaternion.identity);
+            StartCoroutine(BakuhatuTime());
+        }
 
         _rb.velocity = dir + Vector3.up * y;
+    }
+
+    IEnumerator BakuhatuTime()
+    {
+        _ship.SetActive(false);
+        _core.SetActive(true);
+        _isBakuhatu = true;
+        yield return new WaitForSeconds(3f);
+        _ship.SetActive(true);
+        _core.SetActive(false);
+        _isBakuhatu = false;
     }
 
     private void OnCollisionEnter(Collision collision)
