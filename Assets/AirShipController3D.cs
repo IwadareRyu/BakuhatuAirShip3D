@@ -13,6 +13,7 @@ public class AirShipController3D : MonoBehaviour
     [SerializeField]float _jumpPower = 2f;
     [Tooltip("カメラ切り替え")]
     [SerializeField] GameObject _cm3;
+    [SerializeField] GameObject _mainC;
     [Tooltip("三人称か否か")]
     bool _istherdPerson;
     [Tooltip("飛行機のオブジェクト")]
@@ -56,29 +57,39 @@ public class AirShipController3D : MonoBehaviour
         //垂直方向の速度の計算。
         float y = _rb.velocity.y;
 
+        //ジャンプ
         if(Input.GetButtonDown("Jump") && _isGround)
         {
             y = _jumpPower;
         }
+
+        //カメラ切り替え(1人称から３人称へ)
         if(Input.GetKey(KeyCode.LeftShift))
         {
             _cm3.SetActive(true);
+            _mainC.SetActive(false);
             _istherdPerson = true;
         }
-        if(Input.GetKeyUp(KeyCode.LeftShift))
+
+        //カメラ切り替え(3人称から1人称へ)
+        if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _cm3.SetActive(false);
+            _mainC.SetActive(true);
             _istherdPerson = false;
         }
+
+        //飛行機をぶっ飛ばす
         if(Input.GetButtonDown("Fire1") && !_isBakuhatu)
         {
             Instantiate(_bullet, _mazzle.transform.position, Quaternion.identity);
             StartCoroutine(BakuhatuTime());
         }
-
+        //飛行機の動きの計算
         _rb.velocity = dir + Vector3.up * y;
     }
 
+    /// <summary>爆発のクールタイム</summary>
     IEnumerator BakuhatuTime()
     {
         _ship.SetActive(false);
@@ -90,6 +101,8 @@ public class AirShipController3D : MonoBehaviour
         _isBakuhatu = false;
     }
 
+    /// <summary>接地判定</summary>
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         _isGround = true;
