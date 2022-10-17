@@ -48,7 +48,7 @@ public class AirShipController3D : MonoBehaviour
 
         //カメラの座標を基準にdirを代入。
         dir = Camera.main.transform.TransformDirection(dir);
-        //斜め下に行かないために、y軸は0にする。
+        //カメラが斜め下に行かないために、y軸は0にする。
         dir.y = 0;
         //入力がない場合は回転させず、ある時はその方向にキャラを向ける。
         if (dir != Vector3.zero) transform.forward = dir;
