@@ -1,3 +1,4 @@
+using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -26,6 +27,12 @@ public class AirShipController3D : MonoBehaviour
     [SerializeField] GameObject _mazzle;
     [Tooltip("飛行機の球")]
     [SerializeField] GameObject _bullet;
+    [Tooltip("カメラの上下を動かすためのオブジェクト")]
+    [SerializeField] Transform _eye;
+    [Tooltip("カメラを左右に動かす")]
+    [SerializeField] AxisState Horizontal;
+    [Tooltip("カメラを上下に動かす")]
+    [SerializeField] AxisState Vertical;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +49,7 @@ public class AirShipController3D : MonoBehaviour
         {
             h = Input.GetAxisRaw("Horizontal");
         }
-        v = Mathf.Max(Input.GetAxisRaw("Vertical"), 0);
+        v = Mathf.Max(Input.GetAxisRaw("Vertical"));
         //3人称じゃなかったら左右に動かさないようにする。
         Vector3 dir = Vector3.forward * v + Vector3.right * h;
 
@@ -67,7 +74,6 @@ public class AirShipController3D : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftShift))
         {
             _cm3.SetActive(true);
-            _mainC.SetActive(false);
             _istherdPerson = true;
         }
 
@@ -75,7 +81,6 @@ public class AirShipController3D : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _cm3.SetActive(false);
-            _mainC.SetActive(true);
             _istherdPerson = false;
         }
 
@@ -87,6 +92,15 @@ public class AirShipController3D : MonoBehaviour
         }
         //飛行機の動きの計算
         _rb.velocity = dir + Vector3.up * y;
+        //カメラの動き
+        Horizontal.Update(Time.deltaTime);
+        Vertical.Update(Time.deltaTime);
+        //カメラを動かす
+        var horizontal = Quaternion.AngleAxis(Horizontal.Value, Vector3.up);
+        var vertical = Quaternion.AngleAxis(Vertical.Value, Vector3.right);
+        transform.rotation = horizontal;
+        _eye.localRotation = vertical;
+
     }
 
     /// <summary>爆発のクールタイム</summary>
