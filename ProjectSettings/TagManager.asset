@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - CM3
+  - Tower
+  - Wall
+  - Enemy
+  - Bakuhatu
   layers:
   - Default
   - TransparentFX
@@ -13,11 +17,11 @@ TagManager:
   - Water
   - UI
   - CM3
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Wall
+  - EnemyAtari
+  - Bakuhatu
+  - Ship
+  - Player
   - 
   - 
   - 

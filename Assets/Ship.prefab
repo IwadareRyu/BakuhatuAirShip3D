@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 9222707294455420015}
   - component: {fileID: 9222707294455420012}
   - component: {fileID: 9222707294455420013}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LegL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -358,7 +358,7 @@ GameObject:
   - component: {fileID: 9222707294560008865}
   - component: {fileID: 9222707294560008870}
   - component: {fileID: 9222707294560008871}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LegR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -697,7 +697,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9222707294697826949}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -744,7 +744,7 @@ GameObject:
   - component: {fileID: 9222707295345397455}
   - component: {fileID: 9222707295345397452}
   - component: {fileID: 9222707295345397453}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1208,7 +1208,7 @@ GameObject:
   - component: {fileID: 9222707295467558412}
   - component: {fileID: 9222707295467558413}
   - component: {fileID: 9222707295467558418}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: sippo
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1546,7 +1546,7 @@ GameObject:
   - component: {fileID: 9222707295764062158}
   - component: {fileID: 9222707295764062159}
   - component: {fileID: 9222707295764062156}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LegLM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1890,7 +1890,7 @@ GameObject:
   - component: {fileID: 9222707295863178533}
   - component: {fileID: 9222707295863178538}
   - component: {fileID: 9222707295863178539}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fright
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2234,7 +2234,7 @@ GameObject:
   - component: {fileID: 9222707295882065625}
   - component: {fileID: 9222707295882065630}
   - component: {fileID: 9222707295882065631}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: sippo1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2572,7 +2572,7 @@ GameObject:
   - component: {fileID: 9222707295883067067}
   - component: {fileID: 9222707295883067064}
   - component: {fileID: 9222707295883067065}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LegRB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2916,7 +2916,7 @@ GameObject:
   - component: {fileID: 9222707295956624397}
   - component: {fileID: 9222707295956624402}
   - component: {fileID: 9222707295956624403}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LegLB
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3260,7 +3260,7 @@ GameObject:
   - component: {fileID: 9222707296151571182}
   - component: {fileID: 9222707296151571183}
   - component: {fileID: 9222707296151571180}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: LegRM
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3604,7 +3604,7 @@ GameObject:
   - component: {fileID: 9222707296160258857}
   - component: {fileID: 9222707296160258862}
   - component: {fileID: 9222707296160258863}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
