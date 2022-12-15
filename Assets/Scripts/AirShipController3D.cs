@@ -1,4 +1,4 @@
-using Cinemachine;
+ï»¿using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,34 +6,34 @@ using UnityEngine;
 public class AirShipController3D : MonoBehaviour
 {
     Rigidbody _rb;
-    [Tooltip("ƒvƒŒƒCƒ„[‚Ì“®‚«‚Ì‘¬‚³")]
+    [Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®å‹•ãã®é€Ÿã•")]
     [SerializeField]float _speed = 2f;
-    [Tooltip("’n–Ê‚ÉÚ‚µ‚Ä‚¢‚é‚©")]
+    [Tooltip("åœ°é¢ã«æ¥ã—ã¦ã„ã‚‹ã‹")]
     bool _isGround;
-    [Tooltip("ƒWƒƒƒ“ƒv‚Ì‚‚³")]
+    [Tooltip("ã‚¸ãƒ£ãƒ³ãƒ—ã®é«˜ã•")]
     [SerializeField]float _dashPower = 2f;
-    [Tooltip("ƒJƒƒ‰Ø‚è‘Ö‚¦")]
+    [Tooltip("ã‚«ãƒ¡ãƒ©åˆ‡ã‚Šæ›¿ãˆ")]
     [SerializeField] GameObject _cm3;
     [SerializeField] GameObject _mainC;
-    [Tooltip("OlÌ‚©”Û‚©")]
+    [Tooltip("ä¸‰äººç§°ã‹å¦ã‹")]
     bool _istherdPerson;
-    [Tooltip("”òs‹@‚ÌƒIƒuƒWƒFƒNƒg")]
+    [Tooltip("é£›è¡Œæ©Ÿã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
     [SerializeField] GameObject _ship;
-    [Tooltip("ƒvƒŒƒCƒ„[‚ÌƒRƒA")]
+    [Tooltip("ãƒ—ãƒ¬ã‚¤ãƒ¤ãƒ¼ã®ã‚³ã‚¢")]
     [SerializeField] GameObject _core;
-    [Tooltip("”òs‹@”­Ë‚ÌboolŒ^")]
+    [Tooltip("é£›è¡Œæ©Ÿç™ºå°„ã®boolå‹")]
     bool _isBakuhatu;
-    [Tooltip("‹…‚ğ”­Ë‚·‚éƒ}ƒYƒ‹")]
+    [Tooltip("çƒã‚’ç™ºå°„ã™ã‚‹ãƒã‚ºãƒ«")]
     [SerializeField] GameObject _mazzle;
-    [Tooltip("”òs‹@‚Ì‹…")]
+    [Tooltip("é£›è¡Œæ©Ÿã®çƒ")]
     [SerializeField] GameObject _bullet;
-    [Tooltip("ƒJƒƒ‰‚Ìã‰º‚ğ“®‚©‚·‚½‚ß‚ÌƒIƒuƒWƒFƒNƒg")]
+    [Tooltip("ã‚«ãƒ¡ãƒ©ã®ä¸Šä¸‹ã‚’å‹•ã‹ã™ãŸã‚ã®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆ")]
     [SerializeField] Transform _eye;
-    [Tooltip("ƒJƒƒ‰‚ğ¶‰E‚É“®‚©‚·")]
+    [Tooltip("ã‚«ãƒ¡ãƒ©ã‚’å·¦å³ã«å‹•ã‹ã™")]
     [SerializeField] AxisState Horizontal;
-    [Tooltip("ƒJƒƒ‰‚ğã‰º‚É“®‚©‚·")]
+    [Tooltip("ã‚«ãƒ¡ãƒ©ã‚’ä¸Šä¸‹ã«å‹•ã‹ã™")]
     [SerializeField] AxisState Vertical;
-    [Tooltip("‘€ìØ‚è‘Ö‚¦‚ÌboolŒ^")]
+    [Tooltip("æ“ä½œåˆ‡ã‚Šæ›¿ãˆã®boolå‹")]
     bool _airShipFly;
 
     // Start is called before the first frame update
@@ -62,45 +62,45 @@ public class AirShipController3D : MonoBehaviour
             dir = Vector3.up * v + Vector3.right * h;
         }
 
-        //ƒJƒƒ‰‚ÌÀ•W‚ğŠî€‚Édir‚ğ‘ã“üB
+        //ã‚«ãƒ¡ãƒ©ã®åº§æ¨™ã‚’åŸºæº–ã«dirã‚’ä»£å…¥ã€‚
         dir = Camera.main.transform.TransformDirection(dir);
-        //ƒJƒƒ‰‚ªÎ‚ß‰º‚És‚©‚È‚¢‚½‚ß‚ÉAy²‚Í0‚É‚·‚éB
+        //ã‚«ãƒ¡ãƒ©ãŒæ–œã‚ä¸‹ã«è¡Œã‹ãªã„ãŸã‚ã«ã€yè»¸ã¯0ã«ã™ã‚‹ã€‚
         if (!_airShipFly)
         {
             dir.y = 0;
         }
-        //“ü—Í‚ª‚È‚¢ê‡‚Í‰ñ“]‚³‚¹‚¸A‚ ‚é‚Í‚»‚Ì•ûŒü‚ÉƒLƒƒƒ‰‚ğŒü‚¯‚éB
+        //å…¥åŠ›ãŒãªã„å ´åˆã¯å›è»¢ã•ã›ãšã€ã‚ã‚‹æ™‚ã¯ãã®æ–¹å‘ã«ã‚­ãƒ£ãƒ©ã‚’å‘ã‘ã‚‹ã€‚
         if (dir != Vector3.zero) transform.forward = dir;
-        //…•½•ûŒü‚Ì‘¬“x‚ÌŒvZB
+        //æ°´å¹³æ–¹å‘ã®é€Ÿåº¦ã®è¨ˆç®—ã€‚
         dir = dir.normalized * _speed;
-        //‚’¼•ûŒü‚Ì‘¬“x‚ÌŒvZB
+        //å‚ç›´æ–¹å‘ã®é€Ÿåº¦ã®è¨ˆç®—ã€‚
         if (!_airShipFly)
         {
             dir.y = _rb.velocity.y;
         }
 
-        //ƒWƒƒƒ“ƒv
+        //ã‚¸ãƒ£ãƒ³ãƒ—
         if(Input.GetButtonDown("Jump"))
         {
             _rb.useGravity = !_rb.useGravity;
             _airShipFly = !_airShipFly;
         }
 
-        //ƒJƒƒ‰Ø‚è‘Ö‚¦(1lÌ‚©‚ç‚RlÌ‚Ö)
+        //ã‚«ãƒ¡ãƒ©åˆ‡ã‚Šæ›¿ãˆ(1äººç§°ã‹ã‚‰ï¼“äººç§°ã¸)
         if(Input.GetKey(KeyCode.LeftShift))
         {
             _cm3.SetActive(true);
             _istherdPerson = true;
         }
 
-        //ƒJƒƒ‰Ø‚è‘Ö‚¦(3lÌ‚©‚ç1lÌ‚Ö)
+        //ã‚«ãƒ¡ãƒ©åˆ‡ã‚Šæ›¿ãˆ(3äººç§°ã‹ã‚‰1äººç§°ã¸)
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _cm3.SetActive(false);
             _istherdPerson = false;
         }
 
-        //”òs‹@‚ğ‚Ô‚Á”ò‚Î‚·
+        //é£›è¡Œæ©Ÿã‚’ã¶ã£é£›ã°ã™
         if(Input.GetButtonDown("Fire1") && !_isBakuhatu)
         {
             Instantiate(_bullet, _mazzle.transform.position, Quaternion.identity);
@@ -115,19 +115,19 @@ public class AirShipController3D : MonoBehaviour
             dash.y = 0;
         }
 
-        //”òs‹@‚Ì“®‚«‚ÌŒvZ
+        //é£›è¡Œæ©Ÿã®å‹•ãã®è¨ˆç®—
         _rb.velocity = dir + dash;
-        //ƒJƒƒ‰‚Ì“®‚«
+        //ã‚«ãƒ¡ãƒ©ã®å‹•ã
         Horizontal.Update(Time.deltaTime);
         Vertical.Update(Time.deltaTime);
-        //ƒJƒƒ‰‚ğ“®‚©‚·
+        //ã‚«ãƒ¡ãƒ©ã‚’å‹•ã‹ã™
         var horizontal = Quaternion.AngleAxis(Horizontal.Value, Vector3.up);
         transform.rotation = horizontal;
         var vertical = Quaternion.AngleAxis(Vertical.Value, Vector3.right);
         _eye.localRotation = vertical;
     }
 
-    /// <summary>”š”­‚ÌƒN[ƒ‹ƒ^ƒCƒ€</summary>
+    /// <summary>çˆ†ç™ºã®ã‚¯ãƒ¼ãƒ«ã‚¿ã‚¤ãƒ </summary>
     IEnumerator BakuhatuTime()
     {
         _ship.SetActive(false);
@@ -139,7 +139,7 @@ public class AirShipController3D : MonoBehaviour
         _isBakuhatu = false;
     }
 
-    /// <summary>Ú’n”»’è</summary>
+    /// <summary>æ¥åœ°åˆ¤å®š</summary>
     /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {

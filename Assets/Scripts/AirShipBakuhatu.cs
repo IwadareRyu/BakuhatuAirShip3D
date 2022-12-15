@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,9 +11,9 @@ public class AirShipBakuhatu : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //”òs‹@ƒ_ƒ}‚Ì§Œä
+        //é£›è¡Œæ©Ÿãƒ€ãƒã®åˆ¶å¾¡
         _rb = GetComponent<Rigidbody>();
-        //‹…‚ğƒJƒƒ‰•ûŒü‚ÖR‚È‚è‚É”ò‚Î‚·
+        //çƒã‚’ã‚«ãƒ¡ãƒ©æ–¹å‘ã¸å±±ãªã‚Šã«é£›ã°ã™
         Vector3 dir = Vector3.forward * _speed + Vector3.up * _upspeed;
         dir = Camera.main.transform.TransformDirection(dir);
         _rb.AddForce(dir, ForceMode.Impulse);
@@ -30,7 +30,7 @@ public class AirShipBakuhatu : MonoBehaviour
     {
         Bakuhatu();
     }
-    /// <summary>”š”­</summary>
+    /// <summary>çˆ†ç™º</summary>
     void Bakuhatu()
     {
         Instantiate(_bakuhatu, transform.position, Quaternion.identity);

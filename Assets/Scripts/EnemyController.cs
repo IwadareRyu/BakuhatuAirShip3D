@@ -1,50 +1,61 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
 public class EnemyController : MonoBehaviour
 {
     Rigidbody _rb;
-    [SerializeField] float _speed = 3f;
+    NavMeshAgent _agent;
     [SerializeField] GameObject _bip;
-    [SerializeField] Vector3 _lay;
-    [SerializeField] LayerMask _layer = 0;
+    [Tooltip("PlayerÇÃåÏâqëŒè€")]
     private GameObject _tower;
-    public bool _hit { get; set; }
+    [Tooltip("à⁄ìÆêÊÇÃãﬂÇ≠Ç‹Ç≈à⁄ìÆÇµÇΩÇÁé~Ç‹ÇÈboolå^")]
     public bool _stop { get; set; }
-    // Start is called before the first frame update
-    void Start()
+    [Tooltip("à⁄ìÆêÊÇÃï€ë∂")]
+    Vector3 _cashedTarget;
+    [SerializeField] float _speed;
+    Animator _animator;
+    bool _count;
+    Vector3 _targetPos;
+
+    void Awake()
     {
-        _rb = GetComponent<Rigidbody>();
         _tower = GameObject.FindGameObjectWithTag("Tower");
+        _agent = GetComponent<NavMeshAgent>();
+        _cashedTarget = _tower.transform.position;
+        _animator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
+
     void Update()
     {
-        Vector3 dir;
-        if (!_hit)
+        if (Vector3.Distance(_cashedTarget, _tower.transform.position) > Mathf.Epsilon || _count == false)
         {
-            if (!_stop)
-            {
-                dir = Vector3.forward * _speed;
-            }
-            else
-            {
-                dir = new Vector3(0f, 0f, 0f);
-            }
+            _cashedTarget = _tower.transform.position;
+            _agent.SetDestination(_cashedTarget);
+            _count = true;
+        }
+
+        if (_stop)
+        {
+            _targetPos = _tower.transform.position;
+            _targetPos.y = 0;
+            transform.LookAt(_targetPos);
+            _agent.updatePosition = false;
+            _animator.SetBool("Attack", true);
         }
         else
         {
-            dir = Vector3.left * _speed;
+            _agent.updatePosition = true;
+            _animator.SetBool("Attack", false);
         }
-        dir = transform.TransformDirection(dir);
-        _rb.velocity = dir;
     }
 
     private void LateUpdate()
     {
-        transform.LookAt(_tower.transform);
+        //transform.LookAt(_tower.transform);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -20,10 +20,6 @@ public class AtariEnemy : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == ("Wall"))
-        {
-            _enemyScript._hit = true;
-        }
         if(other.gameObject.tag == ("Tower"))
         {
             StartCoroutine(StopTime());
@@ -32,16 +28,16 @@ public class AtariEnemy : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == ("Wall"))
+        if (other.gameObject.tag == ("Tower"))
         {
-            _enemyScript._hit = false;
+            _enemyScript._stop = false;
         }
     }
 
     IEnumerator StopTime()
     {
         yield return new WaitForSeconds(0.5f);
+        Debug.Log("é~Ç‹ÇÍÇ¶ÅI");
         _enemyScript._stop = true;
-        _anim.Play("Attack");
     }
 }
