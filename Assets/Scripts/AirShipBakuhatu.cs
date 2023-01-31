@@ -8,6 +8,8 @@ public class AirShipBakuhatu : MonoBehaviour
     [SerializeField] float _upspeed = 1f;
     Rigidbody _rb;
     [SerializeField] GameObject _bakuhatu;
+    float _timer;
+    bool _bakuhatuTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -23,11 +25,16 @@ public class AirShipBakuhatu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //_timer += Time.deltaTime;
+        //if(_timer > 0.2f)
+        //{
+        //    _bakuhatuTime = true;
+        //}
     }
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.gameObject.tag != "Player")
         Bakuhatu();
     }
     /// <summary>爆発</summary>

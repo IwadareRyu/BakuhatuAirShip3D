@@ -47,12 +47,14 @@ public class AirShipController3D : MonoBehaviour
     {
         float h = 0;
         float v = 0;
+
         if (!_istherdPerson)
         {
             h = Input.GetAxisRaw("Horizontal");
+            v = Input.GetAxisRaw("Vertical");
         }
-        v = Input.GetAxisRaw("Vertical");
         Vector3 dir;
+
         if (!_airShipFly)
         {
             dir = Vector3.forward * v + Vector3.right * h;
@@ -64,15 +66,19 @@ public class AirShipController3D : MonoBehaviour
 
         //カメラの座標を基準にdirを代入。
         dir = Camera.main.transform.TransformDirection(dir);
+
         //カメラが斜め下に行かないために、y軸は0にする。
         if (!_airShipFly)
         {
             dir.y = 0;
         }
+
         //入力がない場合は回転させず、ある時はその方向にキャラを向ける。
         if (dir != Vector3.zero) transform.forward = dir;
+
         //水平方向の速度の計算。
-        dir = dir.normalized * _speed;
+        dir = dir.normalized * _speed; 
+
         //垂直方向の速度の計算。
         if (!_airShipFly)
         {
@@ -86,14 +92,14 @@ public class AirShipController3D : MonoBehaviour
             _airShipFly = !_airShipFly;
         }
 
-        //カメラ切り替え(1人称から３人称へ)
-        if(Input.GetKey(KeyCode.LeftShift))
+        //カメラ切り替え(ブロックすり抜けカメラモード)
+        if(Input.GetButton("ChangeCamera"))
         {
             _cm3.SetActive(true);
             _istherdPerson = true;
         }
 
-        //カメラ切り替え(3人称から1人称へ)
+        //カメラ切り替え(通常カメラモード)
         if (Input.GetKeyUp(KeyCode.LeftShift))
         {
             _cm3.SetActive(false);
@@ -108,6 +114,7 @@ public class AirShipController3D : MonoBehaviour
         }
 
         Vector3 dash = new Vector3(0,0,0);
+
         if (Input.GetButton("Fire2") && _airShipFly)
         {
             dash += Vector3.forward * _dashPower;

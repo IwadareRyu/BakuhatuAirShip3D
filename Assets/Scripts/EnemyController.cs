@@ -19,12 +19,13 @@ public class EnemyController : MonoBehaviour
     Animator _animator;
     bool _count;
     Vector3 _targetPos;
+    bool _dead;
 
     void Awake()
     {
         _tower = GameObject.FindGameObjectWithTag("Tower");
-        _agent = GetComponent<NavMeshAgent>();
         _cashedTarget = _tower.transform.position;
+        _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
     }
 
@@ -51,6 +52,10 @@ public class EnemyController : MonoBehaviour
             _agent.updatePosition = true;
             _animator.SetBool("Attack", false);
         }
+
+        //_targetPos = _tower.transform.position;
+        //_targetPos.y = 0;
+        //transform.LookAt(_targetPos);
     }
 
     private void LateUpdate()
@@ -60,8 +65,11 @@ public class EnemyController : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Bakuhatu")
+        if(other.gameObject.tag == "Bakuhatu" && !_dead)
         {
+            _dead = true;
+            GameObject ragDoll = (GameObject)Resources.Load("ragdoll");
+            Instantiate(ragDoll, transform.position, transform.rotation);
             Destroy(gameObject);
         }
     }
