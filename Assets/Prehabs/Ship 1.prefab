@@ -4390,7 +4390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 20
   _upspeed: 10
-  _bakuhatu: {fileID: 3759150077477390353, guid: 22f0da30997598b40bd6fe5559e857aa, type: 3}
+  _bakuhatu: {fileID: 4987727086063979033, guid: 0c401cc27d94b74499f4a7719fc021e7, type: 3}
 --- !u!95 &7500960608104712538
 Animator:
   serializedVersion: 4

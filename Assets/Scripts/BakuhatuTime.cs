@@ -8,6 +8,8 @@ public class BakuhatuTime : MonoBehaviour
     bool _trigger;
     [SerializeField]Vector3 _attackRangeCenter;
     [SerializeField]float _attackRange = 1f;
+    [SerializeField] float _power = 3f;
+    [SerializeField] float _upPower = 3f;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +19,7 @@ public class BakuhatuTime : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Attack();
     }
 
     private void OnDrawGizmosSelected()
@@ -34,14 +36,6 @@ public class BakuhatuTime : MonoBehaviour
         return center;
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if(other.gameObject.tag == "RagDoll" && !_trigger)
-        {
-            _trigger = true;
-            Attack();
-        }
-    }
 
     void Attack()
     {
@@ -49,7 +43,24 @@ public class BakuhatuTime : MonoBehaviour
 
         foreach(var c in cols)
         {
-            Rigidbody rb = c.gameObject.GetComponent<Rigidbody>();
+            if (c.gameObject.tag != "Player")
+            {
+                if (c.gameObject.tag == "Enemy")
+                {
+                    var enemycs = c.GetComponent<EnemyController>();
+                    if (!enemycs._dead)
+                    {
+                        enemycs.Dead();
+                    }
+                }
+                var rb = c.gameObject.GetComponent<Rigidbody>();
+
+                if (rb)
+                {
+                    Debug.Log("Ç‘Ç¡îÚÇ◊Ç¶Ç¶Ç¶Ç¶ÅI");
+                    rb.AddExplosionForce(_power, transform.position, _attackRange, _upPower, ForceMode.Impulse);
+                }
+            }
         }
     }
 }

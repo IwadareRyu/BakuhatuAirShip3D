@@ -17,7 +17,7 @@ GameObject:
   - component: {fileID: 4062104308647757101}
   m_Layer: 9
   m_Name: Bakuhatu
-  m_TagString: Bakuhatu
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34104,6 +34104,7 @@ MonoBehaviour:
   _time: 1
   _attackRangeCenter: {x: 0, y: 0, z: 0}
   _attackRange: 2.5
+  _power: 3
 --- !u!1 &4020446089310153180
 GameObject:
   m_ObjectHideFlags: 0

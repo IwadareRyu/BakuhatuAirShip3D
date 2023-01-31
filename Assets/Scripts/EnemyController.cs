@@ -19,7 +19,7 @@ public class EnemyController : MonoBehaviour
     Animator _animator;
     bool _count;
     Vector3 _targetPos;
-    bool _dead;
+    public bool _dead { get; set; } = false;
 
     void Awake()
     {
@@ -63,14 +63,11 @@ public class EnemyController : MonoBehaviour
         //transform.LookAt(_tower.transform);
     }
 
-    private void OnTriggerEnter(Collider other)
+    public void Dead()
     {
-        if(other.gameObject.tag == "Bakuhatu" && !_dead)
-        {
-            _dead = true;
-            GameObject ragDoll = (GameObject)Resources.Load("ragdoll");
-            Instantiate(ragDoll, transform.position, transform.rotation);
-            Destroy(gameObject);
-        }
+        _dead = true;
+        GameObject ragDoll = (GameObject)Resources.Load("ragdoll");
+        Instantiate(ragDoll, transform.position, transform.rotation);
+        Destroy(gameObject);
     }
 }
