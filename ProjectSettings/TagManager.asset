@@ -11,6 +11,8 @@ TagManager:
   - Bakuhatu
   - RagDoll
   - DeadEnemy
+  - Score
+  - Timer
   layers:
   - Default
   - TransparentFX
