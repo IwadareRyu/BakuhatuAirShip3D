@@ -20,11 +20,12 @@ public class GameManager : SingletonMonovihair<GameManager>
     [SerializeField] float _scoreTime = 1f;
     [SerializeField] float _countDownTime = 300f;
     float time = 0f;
-    event Action<int, int> _onAddScore;
+    event Func<int, int, int> _onAddScore;
     protected override bool _dontDestroyOnLoad { get { return true; } }
+    int _towerCount = 0;
+    public int towerCount => _towerCount;
 
-
-    public Action<int,int> OnGetScore
+    public Func<int,int,int> OnGetScore
     {
         get => _onAddScore;
         set => _onAddScore = value;
@@ -54,14 +55,17 @@ public class GameManager : SingletonMonovihair<GameManager>
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
-        if(time > 5f)
-        {
-            _onAddScore.Invoke(100, _score);
-            _score += 100;
-            time = 0f;
-        }
         _timerText.text = string.Format("{0:00.00}",_countDownTime);
         _countDownTime = Mathf.Max(_countDownTime - Time.deltaTime, 0f);
+    }
+
+    public void TowerCountAdd()
+    {
+        _towerCount++;
+    }
+
+    public void AddScore(int getScore)
+    {
+        _score = _onAddScore.Invoke(getScore,_score);
     }
 }

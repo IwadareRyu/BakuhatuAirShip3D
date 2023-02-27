@@ -150,9 +150,16 @@ public class AirShipController3D : MonoBehaviour
         Vector3 dash = new Vector3(0,0,0);
 
         //飛行中、前に移動する処理。
-        if (Input.GetButton("Fire2") && _state == State.FlyMode　&& !_observer)
+        if (_state == State.FlyMode　&& !_observer && Input.GetButton("Fire2") || _state == State.FlyMode && !_observer && Input.GetButton("Fire3"))
         {
-            dash += Vector3.forward * _dashPower;
+            if (Input.GetButton("Fire2"))
+            {
+                dash += Vector3.forward * _dashPower;
+            }
+            else if (Input.GetButton("Fire3"))
+            {
+                dash -= Vector3.forward * _speed;
+            }
             dash = Camera.main.transform.TransformDirection(dash);
             dash.y = 0;
         }

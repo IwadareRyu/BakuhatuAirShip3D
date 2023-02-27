@@ -45,7 +45,7 @@ public class BakuhatuTime : MonoBehaviour
         {
             if (c.gameObject.tag != "Player")
             {
-                if (c.gameObject.tag == "Enemy")
+                if (c.gameObject.tag == "Enemy" || c.gameObject.tag == "PoolObj")
                 {
                     var enemycs = c.GetComponent<EnemyController>();
                     if (!enemycs._dead)

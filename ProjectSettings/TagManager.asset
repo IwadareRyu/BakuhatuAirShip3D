@@ -13,6 +13,9 @@ TagManager:
   - DeadEnemy
   - Score
   - Timer
+  - EnemyPool
+  - PoolObj
+  - PlayerBullet
   layers:
   - Default
   - TransparentFX

@@ -25,17 +25,24 @@ public class AirShipBakuhatu : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //_timer += Time.deltaTime;
-        //if(_timer > 0.2f)
-        //{
-        //    _bakuhatuTime = true;
-        //}
+        _timer += Time.deltaTime;
+        if (_timer > 0.2f)
+        {
+            _bakuhatuTime = true;
+        }
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnCollisionEnter(Collision collision)
     {
-        if(other.gameObject.tag != "Player")
-        Bakuhatu();
+        if (collision.gameObject.tag != "Player" && _bakuhatuTime)
+        {
+            if(collision.gameObject.tag == "Tower")
+            {
+                var tower = collision.gameObject.GetComponent<TowerBreak>();
+                tower.BreakTower();
+            }
+            Bakuhatu();
+        }
     }
     /// <summary>爆発</summary>
     void Bakuhatu()

@@ -26,7 +26,7 @@ public class ScoreText : MonoBehaviour
     }
     /// <summary>スコアの追加</summary>
     /// <param name="tempscore"></param>
-    public void AddScore(int tempscore,int score)
+    public int AddScore(int tempscore,int score)
     {
         //スコアを加算する前のスコアの代入。
         float tempScore = score;
@@ -36,6 +36,7 @@ public class ScoreText : MonoBehaviour
         DOTween.To(() => tempScore, x => { _scoreText.text = x.ToString("0000000"); }, score, _scoreTime)
             .OnComplete(() => _scoreText.text = score.ToString("0000000"));
         _scoreText.text = score.ToString("0000000");
+        return score;
 
     }
 }

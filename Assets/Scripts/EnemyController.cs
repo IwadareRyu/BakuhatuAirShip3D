@@ -10,52 +10,89 @@ public class EnemyController : MonoBehaviour
     NavMeshAgent _agent;
     [SerializeField] GameObject _bip;
     [Tooltip("PlayerÇÃåÏâqëŒè€")]
-    private GameObject _tower;
-    [Tooltip("à⁄ìÆêÊÇÃãﬂÇ≠Ç‹Ç≈à⁄ìÆÇµÇΩÇÁé~Ç‹ÇÈboolå^")]
-    public bool _stop { get; set; }
+    private GameObject _player;
     [Tooltip("à⁄ìÆêÊÇÃï€ë∂")]
     Vector3 _cashedTarget;
     [SerializeField] float _speed;
     Animator _animator;
-    bool _count;
+    bool _attackbool;
     Vector3 _targetPos;
     public bool _dead { get; set; } = false;
+    [SerializeField]bool _move;
+    [SerializeField]AttackState _state = AttackState.MoveStop;
+    [SerializeField] RuntimeAnimatorController _movePattern;
+    [SerializeField] RuntimeAnimatorController _standPattern;
 
-    void Awake()
+    private void Awake()
     {
-        _tower = GameObject.FindGameObjectWithTag("Tower");
-        _cashedTarget = _tower.transform.position;
+        _player = GameObject.FindGameObjectWithTag("Player");
+        _cashedTarget = _player.transform.position;
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+    }
+    private void OnEnable()
+    {
+        StartCoroutine(AgentReset());
+        _cashedTarget = _player.transform.position;
+        _dead = false;
+        _animator.SetBool("Walk", true);
+    }
+
+    IEnumerator AgentReset()
+    {
+        _agent.enabled = false;
+        yield return new WaitForEndOfFrame();
+        _agent.enabled = true;
+    }
+
+    private void Start()
+    {
+        if(_move)
+        {
+            _animator.runtimeAnimatorController = _movePattern;
+            _animator.SetBool("Walk", true);
+        }
+        else
+        {
+            _animator.runtimeAnimatorController = _standPattern;
+        }
     }
 
 
     void Update()
     {
-        if (Vector3.Distance(_cashedTarget, _tower.transform.position) > Mathf.Epsilon || _count == false)
+        if (_state == AttackState.MoveStop && _move)
         {
-            _cashedTarget = _tower.transform.position;
+            _cashedTarget = _player.transform.position;
             _agent.SetDestination(_cashedTarget);
-            _count = true;
         }
-
-        if (_stop)
+        else if(!_move)
         {
-            _targetPos = _tower.transform.position;
+            _targetPos = _player.transform.position;
             _targetPos.y = 0;
             transform.LookAt(_targetPos);
-            _agent.updatePosition = false;
-            _animator.SetBool("Attack", true);
-        }
-        else
-        {
-            _agent.updatePosition = true;
-            _animator.SetBool("Attack", false);
         }
 
-        //_targetPos = _tower.transform.position;
-        //_targetPos.y = 0;
-        //transform.LookAt(_targetPos);
+        if (_state == AttackState.Attack)
+        {
+            _targetPos = _player.transform.position;
+            _targetPos.y = 0;
+            transform.LookAt(_targetPos);
+            if(!_attackbool)
+            {
+                _attackbool = true;
+                StartCoroutine(Attack());
+            }
+        }
+    }
+
+    IEnumerator Attack()
+    {
+        _agent.updatePosition = false;
+        _agent.isStopped = true;
+        _animator.SetTrigger("Attack");
+        yield return new WaitForSeconds(2f);
+        _attackbool = false;
     }
 
     private void LateUpdate()
@@ -63,11 +100,51 @@ public class EnemyController : MonoBehaviour
         //transform.LookAt(_tower.transform);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject.tag == "Player")
+        {
+            _state = AttackState.Attack;
+            if(_move)_animator.SetBool("Walk", false);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            _state = AttackState.MoveStop;
+            if (_move) _animator.SetBool("Walk", true);
+            _agent.updatePosition = true;
+            _agent.isStopped = false;
+
+        }
+    }
+
     public void Dead()
     {
         _dead = true;
+        GameManager.Instance.AddScore(100);
         GameObject ragDoll = (GameObject)Resources.Load("ragdoll");
         Instantiate(ragDoll, transform.position, transform.rotation);
-        Destroy(gameObject);
+        if (_move)
+        {
+            _state = AttackState.MoveStop;
+            _agent.updatePosition = true;
+            _agent.isStopped = false;
+            _attackbool = false;
+            gameObject.SetActive(false);
+
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    enum AttackState
+    {
+        MoveStop,
+        Attack,
     }
 }
