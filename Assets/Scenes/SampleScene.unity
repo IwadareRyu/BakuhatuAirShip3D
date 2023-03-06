@@ -62728,12 +62728,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _speed: 5
   _dashPower: 20
-  _cm3: {fileID: 284790039}
-  _mainC: {fileID: 963194225}
+  _subCamera: {fileID: 0}
+  _AllCm: []
+  _brownStone: {fileID: 0}
+  _fade: {r: 0, g: 0, b: 0, a: 0}
+  _noFade: {r: 0, g: 0, b: 0, a: 0}
   _ship: {fileID: 355086750}
   _core: {fileID: 1312051463}
   _mazzle: {fileID: 44419228}
   _bullet: {fileID: 7235587690995874302, guid: f95a5abe2fb5ff441ad68b84294e21be, type: 3}
+  _dropBullet: {fileID: 0}
   _eye: {fileID: 478506982}
   Horizontal:
     Value: 0
@@ -62771,6 +62775,7 @@ MonoBehaviour:
       m_RecenteringTime: 0
       m_LegacyHeadingDefinition: 0
       m_LegacyVelocityFilterStrength: 0
+  _state: 2
 --- !u!1001 &1714773248
 PrefabInstance:
   m_ObjectHideFlags: 0

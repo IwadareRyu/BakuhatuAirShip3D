@@ -1176,6 +1176,7 @@ GameObject:
   - component: {fileID: 9042259905081940742}
   - component: {fileID: 9042259905091499176}
   - component: {fileID: 9146144581899608859}
+  - component: {fileID: 90035091169789858}
   m_Layer: 0
   m_Name: ragdoll
   m_TagString: DeadEnemy
@@ -1236,6 +1237,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &90035091169789858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9042259905082099494}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc6b5a1b0bb2d947be0296e211f5464, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _time: 5
 --- !u!1 &9042259905082099496
 GameObject:
   m_ObjectHideFlags: 0

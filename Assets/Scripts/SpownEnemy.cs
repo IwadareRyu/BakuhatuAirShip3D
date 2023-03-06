@@ -25,8 +25,9 @@ public class SpownEnemy : MonoBehaviour
 
     IEnumerator SpownTime()
     {
+        yield return new WaitForSeconds(5f);
         GetPool();
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         _spownbool = false;
     }
 

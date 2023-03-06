@@ -9,6 +9,8 @@ public class EnemyController : MonoBehaviour
     Rigidbody _rb;
     NavMeshAgent _agent;
     [SerializeField] GameObject _bip;
+    [SerializeField] Transform _mazzle;
+    [SerializeField] GameObject _bullet;
     [Tooltip("PlayerÇÃåÏâqëŒè€")]
     private GameObject _player;
     [Tooltip("à⁄ìÆêÊÇÃï€ë∂")]
@@ -61,24 +63,30 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (_state == AttackState.MoveStop && _move)
+        if (_state == AttackState.MoveStop)
         {
-            _cashedTarget = _player.transform.position;
-            _agent.SetDestination(_cashedTarget);
-        }
-        else if(!_move)
-        {
-            _targetPos = _player.transform.position;
-            _targetPos.y = 0;
-            transform.LookAt(_targetPos);
+            if (_move)
+            {
+                //if (_agent.pathStatus != NavMeshPathStatus.PathInvalid)
+                //{
+                    _cashedTarget = _player.transform.position;
+                    _agent.SetDestination(_cashedTarget);
+                //}
+            }
+            else
+            {
+                _targetPos = _player.transform.position;
+                _targetPos.y = transform.position.y;
+                transform.LookAt(_targetPos);
+            }
         }
 
         if (_state == AttackState.Attack)
         {
             _targetPos = _player.transform.position;
-            _targetPos.y = 0;
+            _targetPos.y = transform.position.y;
             transform.LookAt(_targetPos);
-            if(!_attackbool)
+            if (!_attackbool)
             {
                 _attackbool = true;
                 StartCoroutine(Attack());
@@ -93,11 +101,6 @@ public class EnemyController : MonoBehaviour
         _animator.SetTrigger("Attack");
         yield return new WaitForSeconds(2f);
         _attackbool = false;
-    }
-
-    private void LateUpdate()
-    {
-        //transform.LookAt(_tower.transform);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -115,10 +118,14 @@ public class EnemyController : MonoBehaviour
         {
             _state = AttackState.MoveStop;
             if (_move) _animator.SetBool("Walk", true);
-            _agent.updatePosition = true;
             _agent.isStopped = false;
-
+            _agent.updatePosition = true;
         }
+    }
+
+    public void StartAttack()
+    {
+        Instantiate(_bullet,_mazzle.position,Quaternion.identity);
     }
 
     public void Dead()

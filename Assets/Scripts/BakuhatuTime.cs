@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class BakuhatuTime : MonoBehaviour
 {
-    [SerializeField]float _time = 1f;
+    [SerializeField]float _time = 2f;
     bool _trigger;
-    [SerializeField]Vector3 _attackRangeCenter;
+    Vector3 _attackRangeCenter;
     [SerializeField]float _attackRange = 1f;
     [SerializeField] float _power = 3f;
     [SerializeField] float _upPower = 3f;
@@ -43,7 +43,7 @@ public class BakuhatuTime : MonoBehaviour
 
         foreach(var c in cols)
         {
-            if (c.gameObject.tag != "Player")
+            if (c.gameObject.tag != "Player" && c.gameObject.tag != "EnemyBullet")
             {
                 if (c.gameObject.tag == "Enemy" || c.gameObject.tag == "PoolObj")
                 {

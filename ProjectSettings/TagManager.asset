@@ -16,6 +16,10 @@ TagManager:
   - EnemyPool
   - PoolObj
   - PlayerBullet
+  - EnemyBullet
+  - PlusTimer
+  - PlusScore
+  - ResultText
   layers:
   - Default
   - TransparentFX

@@ -34105,6 +34105,7 @@ MonoBehaviour:
   _attackRangeCenter: {x: 0, y: 0, z: 0}
   _attackRange: 2.5
   _power: 3
+  _upPower: 3
 --- !u!1 &4020446089310153180
 GameObject:
   m_ObjectHideFlags: 0
